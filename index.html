@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FedEx - Conectados con el mañana</title>
+    <title>Biomed - Productos Médicos de Biomedicina</title>
     <style>
         * {
             margin: 0;
@@ -11,1106 +11,1232 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --bg-primary: #f5f5f7;
-            --bg-secondary: #ffffff;
-            --text-primary: #1d1d1f;
-            --text-secondary: #86868b;
-            --border-color: rgba(0, 0, 0, 0.04);
-            --shadow-light: rgba(0, 0, 0, 0.04);
-            --shadow-medium: rgba(0, 0, 0, 0.06);
-            --shadow-heavy: rgba(0, 0, 0, 0.08);
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --gradient-start: #ffffff;
-            --gradient-end: #f5f5f7;
-            --accent-purple: #4d148c;
-            --accent-orange: #ff6600;
-        }
-
-        [data-theme="dark"] {
-            --bg-primary: #0a0014;
-            --bg-secondary: #1a0f2e;
-            --text-primary: #f5f5f7;
-            --text-secondary: #a89bb8;
-            --border-color: rgba(124, 58, 237, 0.2);
-            --shadow-light: rgba(77, 20, 140, 0.2);
-            --shadow-medium: rgba(77, 20, 140, 0.3);
-            --shadow-heavy: rgba(77, 20, 140, 0.4);
-            --card-bg: rgba(26, 15, 46, 0.85);
-            --gradient-start: #0a0014;
-            --gradient-end: #1a0f2e;
-        }
-
-        @font-face {
-            font-family: 'FedEx';
-            src: local('Futura Bold'), local('Futura-Bold'), local('Century Gothic Bold');
-            font-weight: 700;
-            font-style: normal;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
             overflow-x: hidden;
-            background: var(--bg-primary);
-            transition: background 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Header */
         header {
-            background: var(--card-bg);
+            background: rgba(255, 255, 255, 0.72);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
-            padding: 1rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 0.5px solid var(--border-color);
-            position: sticky;
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        @font-face {
-            font-family: 'FedEx';
-            src: local('Futura Bold'), local('Futura-Bold'), local('Century Gothic Bold');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 32px;
-            width: auto;
-            transition: opacity 0.3s ease;
-        }
-
-        [data-theme="dark"] .logo img {
-            filter: brightness(0) invert(1);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
         }
 
         nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 40px;
             display: flex;
-            gap: 2.5rem;
+            justify-content: space-between;
             align-items: center;
         }
 
-        nav a {
-            color: var(--text-primary);
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6b8e7f;
+            letter-spacing: -0.8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #1d1d1f;
             text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.3s;
+            font-size: 13px;
             font-weight: 400;
-            letter-spacing: -0.2px;
+            opacity: 0.88;
+            transition: opacity 0.3s;
         }
 
-        nav a:hover {
-            color: var(--accent-orange);
-        }
-
-        .user-section {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .login-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.3s;
-            font-weight: 400;
-        }
-
-        .login-btn:hover {
-            color: var(--accent-orange);
-        }
-
-        .theme-toggle {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background: var(--border-color);
-        }
-
-        .theme-icon {
-            width: 20px;
-            height: 20px;
-            stroke: var(--text-primary);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 60px;
-            left: 0;
-            right: 0;
-            background: var(--card-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 0.5px solid var(--border-color);
-            padding: 1rem;
-            flex-direction: column;
-            gap: 1rem;
-            z-index: 999;
-        }
-
-        .mobile-nav.active {
-            display: flex;
-        }
-
-        .mobile-nav a {
-            color: var(--text-primary);
-            text-decoration: none;
-            padding: 0.75rem;
-            border-radius: 10px;
-            transition: background 0.3s;
-        }
-
-        .mobile-nav a:hover {
-            background: var(--border-color);
+        .nav-links a:hover {
+            opacity: 1;
         }
 
         /* Hero Section */
         .hero {
-            position: relative;
-            min-height: 85vh;
-            background: linear-gradient(180deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            margin-top: 60px;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 4rem 2rem;
-            transition: background 0.3s ease;
+            text-align: center;
+            background: linear-gradient(135deg, #6b8e7f 0%, #8ba89a 50%, #9fb5a8 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-bg {
+        .hero::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 20%, rgba(77, 20, 140, 0.12) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 102, 0, 0.08) 0%, transparent 50%);
-        }
-
-        [data-theme="dark"] .hero-bg {
-            background: radial-gradient(circle at 50% 20%, rgba(124, 58, 237, 0.25) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 102, 0, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 20% 70%, rgba(77, 20, 140, 0.2) 0%, transparent 40%);
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.3;
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 1100px;
-            width: 100%;
-            padding: 0 1rem;
-        }
-
-        h1 {
-            color: var(--text-primary);
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 600;
-            margin-bottom: 4rem;
-            letter-spacing: -1px;
-            line-height: 1.1;
-            transition: color 0.3s ease;
-        }
-
-        /* Cards Section */
-        .cards {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            max-width: 650px;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            flex-wrap: nowrap;
-        }
-
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            padding: 2rem 1.5rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            border-radius: 20px;
-            border: 0.5px solid var(--border-color);
-            box-shadow: 0 4px 16px var(--shadow-light);
-            flex: 1;
-            min-width: 0;
-        }
-
-        .card:hover {
-            background: var(--bg-secondary);
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 32px var(--shadow-heavy);
-        }
-
-        .card:active {
-            transform: translateY(-2px) scale(1.01);
-        }
-
-        .card.active {
-            background: var(--bg-secondary);
-            box-shadow: 0 8px 24px rgba(77, 20, 140, 0.12);
-        }
-
-        [data-theme="dark"] .card.active {
-            background: rgba(77, 20, 140, 0.3);
-            border-color: rgba(124, 58, 237, 0.5);
-            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
-        }
-
-        .card-icon {
-            width: 44px;
-            height: 44px;
-            stroke: var(--accent-purple);
-            stroke-width: 1.5;
-            flex-shrink: 0;
-        }
-
-        .card-title {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-primary);
-            text-align: center;
-            letter-spacing: -0.2px;
-            line-height: 1.4;
-            word-break: break-word;
-        }
-
-        /* Search Section */
-        .search-container {
-            display: flex;
-            gap: 0.75rem;
-            width: 100%;
-            max-width: 750px;
-            margin: 0 auto;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            border: none;
-            border-radius: 14px;
-            font-size: 1rem;
-            background: var(--card-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            box-shadow: 0 2px 12px var(--shadow-medium);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 0.5px solid var(--border-color);
-            font-weight: 400;
-            letter-spacing: -0.2px;
-            color: var(--text-primary);
-        }
-
-        .search-input:focus {
-            outline: none;
-            box-shadow: 0 4px 20px rgba(77, 20, 140, 0.12);
-            background: var(--bg-secondary);
-        }
-
-        .search-input::placeholder {
-            color: var(--text-secondary);
-        }
-
-        .track-btn {
-            padding: 1rem 2.5rem;
-            background: var(--accent-orange);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-size: 0.9375rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: -0.2px;
-            box-shadow: 0 4px 16px rgba(255, 102, 0, 0.2);
-            white-space: nowrap;
-        }
-
-        .track-btn:hover {
-            background: #e55d00;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.28);
-        }
-
-        .track-btn:active {
-            transform: translateY(0);
-        }
-
-        /* Info Section */
-        .info-section {
-            background: var(--card-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            padding: 2.5rem 3rem;
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-            max-width: 1100px;
-            margin: -2rem auto 4rem;
-            position: relative;
-            z-index: 3;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px var(--shadow-medium);
-            border: 0.5px solid var(--border-color);
-            width: calc(100% - 2rem);
-        }
-
-        .info-icon {
-            width: 64px;
-            height: 64px;
-            stroke: var(--accent-purple);
-            stroke-width: 1.5;
-            flex-shrink: 0;
-        }
-
-        .info-content h2 {
-            color: var(--text-primary);
-            font-size: clamp(1.25rem, 3vw, 1.5rem);
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-
-        .info-content p {
-            color: var(--text-secondary);
-            font-size: clamp(0.875rem, 2vw, 1rem);
-            line-height: 1.5;
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-            letter-spacing: -0.2px;
-        }
-
-        .info-link {
-            color: var(--accent-purple);
-            font-weight: 500;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .info-link:hover {
-            opacity: 0.7;
-        }
-
-        .fedex-manager-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--card-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            color: var(--accent-purple);
-            padding: 0.875rem 1.75rem;
-            border-radius: 100px;
-            border: 0.5px solid rgba(77, 20, 140, 0.2);
-            font-weight: 500;
-            font-size: 0.875rem;
-            cursor: pointer;
-            box-shadow: 0 8px 24px var(--shadow-heavy);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 100;
-            letter-spacing: -0.2px;
-        }
-
-        .fedex-manager-btn:hover {
-            background: var(--accent-purple);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(77, 20, 140, 0.24);
-        }
-
-        .fedex-manager-btn:active {
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header {
-                padding: 1rem 1.5rem;
-            }
-
-            nav {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            h1 {
-                margin-bottom: 2.5rem;
-            }
-
-            .cards {
-                gap: 0.5rem;
-                max-width: 100%;
-            }
-
-            .card {
-                padding: 1.25rem 0.75rem;
-                gap: 0.75rem;
-                border-radius: 16px;
-            }
-
-            .card-icon {
-                width: 32px;
-                height: 32px;
-            }
-
-            .card-title {
-                font-size: 0.75rem;
-                line-height: 1.3;
-            }
-
-            .search-container {
-                flex-direction: column;
-            }
-
-            .track-btn {
-                width: 100%;
-            }
-
-            .info-section {
-                flex-direction: column;
-                text-align: center;
-                padding: 2rem 1.5rem;
-                margin: 1rem;
-                width: calc(100% - 2rem);
-            }
-
-            .fedex-manager-btn {
-                bottom: 1rem;
-                right: 1rem;
-                left: 1rem;
-                font-size: 0.8125rem;
-                padding: 0.875rem 1rem;
-            }
-
-            .user-section .login-btn span {
-                display: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                padding: 2rem 1rem;
-                min-height: auto;
-            }
-
-            .cards {
-                gap: 0.4rem;
-            }
-
-            .card {
-                padding: 1rem 0.5rem;
-                gap: 0.5rem;
-                border-radius: 14px;
-            }
-
-            .card-icon {
-                width: 28px;
-                height: 28px;
-            }
-
-            .card-title {
-                font-size: 0.7rem;
-            }
-
-            .info-icon {
-                width: 48px;
-                height: 48px;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .cards {
-                max-width: 100%;
-            }
-        }
-
-        /* Manage Section */
-        .manage-section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .manage-title {
-            text-align: center;
-            font-size: clamp(1.75rem, 4vw, 2.25rem);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 3rem;
-            letter-spacing: -0.5px;
-        }
-
-        .manage-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .manage-card {
-            background: var(--card-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            padding: 2.5rem 1.5rem;
-            border-radius: 20px;
-            border: 0.5px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.25rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 16px var(--shadow-light);
-        }
-
-        .manage-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px var(--shadow-heavy);
-            background: var(--bg-secondary);
-        }
-
-        .manage-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-purple) 0%, #7c3aed 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .manage-icon::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background: linear-gradient(135deg, transparent 0%, rgba(255, 102, 0, 0.3) 100%);
-        }
-
-        .manage-icon.alert {
-            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-orange) 100%);
-        }
-
-        .manage-icon svg {
-            width: 36px;
-            height: 36px;
-            stroke: white;
             z-index: 1;
+            max-width: 900px;
+            padding: 0 40px;
         }
 
-        .manage-card-title {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #0066cc;
-            text-align: center;
-            letter-spacing: 0.5px;
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -2.5px;
+            line-height: 1.05;
+        }
+
+        .hero .subtitle {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            opacity: 0.95;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            opacity: 0.85;
             line-height: 1.4;
         }
 
-        [data-theme="dark"] .manage-card-title {
-            color: #5ba3ff;
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        /* Promo Section */
-        .promo-section {
-            background: var(--accent-purple);
+        .cta-primary {
+            padding: 16px 36px;
+            background: white;
+            color: #6b8e7f;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 17px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .cta-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-secondary {
+            padding: 16px 36px;
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 17px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: white;
+        }
+
+        /* Featured Product Section */
+        .featured-section {
+            padding: 120px 40px;
+            background: #fbfbfd;
+        }
+
+        .featured-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            padding: 4rem 3rem;
-            margin: 2rem auto 4rem;
-            max-width: 1200px;
-            border-radius: 24px;
+            gap: 80px;
             align-items: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 12px 48px rgba(77, 20, 140, 0.3);
         }
 
-        .promo-bg {
+        .featured-image {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(135deg, #e8f0ed 0%, #d4e3dc 100%);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .featured-image:hover {
+            transform: scale(1.02);
+        }
+
+        .featured-content h2 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            color: #1d1d1f;
+        }
+
+        .featured-content h3 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #6b8e7f;
+            letter-spacing: -0.5px;
+        }
+
+        .featured-content p {
+            font-size: 21px;
+            line-height: 1.5;
+            color: #6e6e73;
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            font-size: 17px;
+            color: #1d1d1f;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: #6b8e7f;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        /* Product Gallery */
+        .product-gallery {
+            padding: 120px 40px;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -2px;
+            color: #1d1d1f;
+        }
+
+        .section-header p {
+            font-size: 24px;
+            color: #6e6e73;
+            font-weight: 400;
+        }
+
+        .gallery-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .gallery-item {
+            background: #f5f5f7;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #e8f0ed 0%, #d4e3dc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .gallery-item-content {
+            padding: 30px;
+        }
+
+        .gallery-item-content h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1d1d1f;
+            letter-spacing: -0.5px;
+        }
+
+        .gallery-item-content p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #6e6e73;
+            margin-bottom: 20px;
+        }
+
+        .learn-more {
+            color: #6b8e7f;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.3s;
+        }
+
+        .learn-more:hover {
+            gap: 10px;
+        }
+
+        .learn-more::after {
+            content: '→';
+        }
+
+        /* Large Image Section */
+        .image-showcase {
+            padding: 120px 40px;
+            background: #fbfbfd;
+        }
+
+        .showcase-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .showcase-image {
+            width: 100%;
+            height: 700px;
+            background: linear-gradient(135deg, #6b8e7f 0%, #8ba89a 100%);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            color: white;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-image::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(255, 102, 0, 0.2) 0%, transparent 50%);
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.4;
         }
 
-        .promo-content {
-            position: relative;
-            z-index: 2;
-            color: white;
+        .showcase-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .promo-title {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.5px;
+        .showcase-text h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+            color: #1d1d1f;
         }
 
-        .promo-text {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            opacity: 0.95;
+        .showcase-text p {
+            font-size: 21px;
+            line-height: 1.5;
+            color: #6e6e73;
         }
 
-        .promo-btn {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 0.875rem 2.5rem;
-            border-radius: 100px;
-            font-size: 0.9375rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: 0.5px;
-        }
-
-        .promo-btn:hover {
+        /* Split Content Section */
+        .split-section {
+            padding: 120px 40px;
             background: white;
-            color: var(--accent-purple);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3);
         }
 
-        .promo-image {
-            position: relative;
+        .split-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .split-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #d4e3dc 0%, #c5d8cf 100%);
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2;
+            font-size: 70px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
 
-        .volleyball-img {
-            width: 280px;
-            height: auto;
-            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
-            animation: float 6s ease-in-out infinite;
+        /* Technology Section */
+        .tech-section {
+            padding: 120px 40px;
+            background: #1d1d1f;
+            color: white;
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(5deg);
-            }
+        .tech-header {
+            text-align: center;
+            margin-bottom: 80px;
         }
 
-        /* News Section */
-        .news-section {
-            max-width: 1200px;
-            margin: 0 auto 4rem;
-            padding: 0 2rem;
+        .tech-header h2 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -2px;
+        }
+
+        .tech-header p {
+            font-size: 24px;
+            opacity: 0.8;
+        }
+
+        .tech-grid {
+            max-width: 1400px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
         }
 
-        .news-card {
-            background: var(--card-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-radius: 20px;
-            border: 0.5px solid var(--border-color);
-            padding: 2.5rem;
-            box-shadow: 0 4px 16px var(--shadow-light);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .tech-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 50px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .news-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px var(--shadow-heavy);
+        .tech-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-8px);
         }
 
-        .news-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .tech-icon {
+            font-size: 50px;
+            margin-bottom: 24px;
         }
 
-        .news-title {
-            font-size: 1.25rem;
+        .tech-card h3 {
+            font-size: 28px;
             font-weight: 600;
-            color: var(--text-primary);
+            margin-bottom: 16px;
             letter-spacing: -0.5px;
-            line-height: 1.3;
         }
 
-        .news-text {
-            font-size: 0.9375rem;
-            color: var(--text-secondary);
+        .tech-card p {
+            font-size: 17px;
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 120px 40px;
+            background: #fbfbfd;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 64px;
+            font-weight: 700;
+            color: #6b8e7f;
+            margin-bottom: 12px;
+            letter-spacing: -2px;
+        }
+
+        .stat-item p {
+            font-size: 17px;
+            color: #6e6e73;
+            font-weight: 500;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 120px 40px;
+            background: white;
+        }
+
+        .testimonial-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .testimonial-card {
+            background: #f5f5f7;
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-size: 17px;
             line-height: 1.6;
+            color: #1d1d1f;
+            margin-bottom: 24px;
         }
 
-        .news-note {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            font-style: italic;
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
 
-        .news-btn {
-            background: transparent;
-            color: var(--accent-purple);
-            border: 2px solid var(--accent-purple);
-            padding: 0.75rem 2rem;
-            border-radius: 100px;
-            font-size: 0.875rem;
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6b8e7f 0%, #8ba89a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 4px;
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: #6e6e73;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #6b8e7f 0%, #8ba89a 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .contact p {
+            font-size: 24px;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 18px;
+            background: white;
+            color: #6b8e7f;
+            border: none;
+            border-radius: 980px;
+            font-size: 17px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: 0.5px;
-            align-self: flex-start;
-            margin-top: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .news-btn:hover {
-            background: var(--accent-purple);
+        .submit-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #1d1d1f;
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(77, 20, 140, 0.3);
+            padding: 80px 40px 40px;
         }
 
-        @media (max-width: 1024px) {
-            .promo-section {
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            opacity: 0.6;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #a1a1a6;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .copyright {
+            color: #6e6e73;
+            font-size: 13px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .social-links a {
+            color: #a1a1a6;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        @media (max-width: 1200px) {
+            .featured-container,
+            .split-container,
+            .tech-grid {
                 grid-template-columns: 1fr;
-                padding: 3rem 2rem;
-                text-align: center;
+                gap: 50px;
             }
 
-            .volleyball-img {
-                width: 220px;
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .news-section {
+            .testimonial-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            .manage-section {
-                padding: 3rem 1.5rem;
+            .hero h1 {
+                font-size: 48px;
             }
 
-            .manage-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
+            .hero .subtitle {
+                font-size: 24px;
             }
 
-            .manage-card {
-                padding: 1.75rem 1rem;
+            .nav-links {
+                gap: 20px;
             }
 
-            .manage-icon {
-                width: 60px;
-                height: 60px;
+            .section-header h2,
+            .featured-content h2 {
+                font-size: 40px;
             }
 
-            .manage-icon svg {
-                width: 28px;
-                height: 28px;
-            }
-
-            .promo-section {
-                margin: 2rem 1rem 3rem;
-                padding: 2.5rem 1.5rem;
-            }
-
-            .volleyball-img {
-                width: 180px;
-            }
-
-            .news-section {
-                padding: 0 1.5rem;
-                margin-bottom: 3rem;
-            }
-
-            .news-card {
-                padding: 2rem 1.5rem;
-            }
-
-            .news-title {
-                font-size: 1.125rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .manage-grid {
+            .gallery-grid {
                 grid-template-columns: 1fr;
             }
 
-            .manage-card {
-                padding: 1.5rem 1rem;
+            .stats-container {
+                grid-template-columns: 1fr;
             }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .cta-primary,
+            .cta-secondary {
+                width: 100%;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="https://purepng.com/public/uploads/large/purepng.com-fedex-logologobrand-logoiconslogos-251519939539h7rji.png" alt="FedEx Logo">
-        </div>
         <nav>
-            <a href="#">Envío</a>
-            <a href="#">Rastreo</a>
-            <a href="#">Soporte</a>
-            <a href="#">Cuenta</a>
+            <div class="logo">Biomed</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#tecnologia">Tecnología</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
         </nav>
-        <div class="user-section">
-            <a href="#" class="login-btn">
-                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
-                <span>Inscribirse/Iniciar sesión</span>
-            </a>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                <svg class="theme-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                </svg>
-            </button>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
-                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </div>
     </header>
 
-    <div class="mobile-nav" id="mobileNav">
-        <a href="#">Envío</a>
-        <a href="#">Rastreo</a>
-        <a href="#">Soporte</a>
-        <a href="#">Cuenta</a>
-    </div>
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Innovación Médica</h1>
+            <div class="subtitle">Redefiniendo el Futuro de la Salud</div>
+            <p>Tecnología de vanguardia en biomedicina para profesionales que marcan la diferencia</p>
+            <div class="cta-buttons">
+                <a href="#productos" class="cta-primary">Explorar Productos</a>
+                <a href="#contacto" class="cta-secondary">Solicitar Demo</a>
+            </div>
+        </div>
+    </section>
 
-    <main>
-        <section class="hero">
-            <div class="hero-bg"></div>
-            <div class="hero-content">
-                <h1>Conectados con el mañana.</h1>
-                
-                <div class="cards">
-                    <div class="card active" onclick="selectCard(this)">
-                        <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <div class="card-title">Tarifas y Tiempos<br>de Tránsito</div>
-                    </div>
-                    <div class="card" onclick="selectCard(this)">
-                        <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                        <div class="card-title">Rastrea</div>
-                    </div>
-                    <div class="card" onclick="selectCard(this)">
-                        <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                        </svg>
-                        <div class="card-title">Envía</div>
-                    </div>
-                </div>
+    <section class="featured-section fade-in">
+        <div class="featured-container">
+            <div class="featured-image">🔬</div>
+            <div class="featured-content">
+                <h3>Nuevo</h3>
+                <h2>Sistema de Diagnóstico Avanzado</h2>
+                <p>Precisión revolucionaria con inteligencia artificial integrada. Resultados en tiempo real que transforman la atención médica.</p>
+                <ul class="feature-list">
+                    <li>Análisis molecular de alta precisión</li>
+                    <li>Conectividad cloud en tiempo real</li>
+                    <li>Certificación internacional ISO 13485</li>
+                    <li>Interfaz intuitiva táctil</li>
+                </ul>
+                <a href="#" class="learn-more">Conocer más</a>
+            </div>
+        </div>
+    </section>
 
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="ID DE RASTREO">
-                    <button class="track-btn">Track →</button>
+    <section class="product-gallery" id="productos">
+        <div class="section-header fade-in">
+            <h2>Catálogo de Productos</h2>
+            <p>Soluciones integrales para cada necesidad médica</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in">
+                <div class="gallery-item-image">🩺</div>
+                <div class="gallery-item-content">
+                    <h3>Monitoreo Vital</h3>
+                    <p>Dispositivos de monitoreo continuo con alertas inteligentes y conectividad hospitalaria.</p>
+                    <a href="#" class="learn-more">Ver detalles</a>
                 </div>
             </div>
-        </section>
-
-        <section class="manage-section">
-            <h2 class="manage-title">Administra tus envíos</h2>
-            
-            <div class="manage-grid">
-                <div class="manage-card">
-                    <div class="manage-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="manage-card-title">ABRIR UNA CUENTA</h3>
-                </div>
-
-                <div class="manage-card">
-                    <div class="manage-icon alert">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="manage-card-title">ALERTAS DE SERVICIO</h3>
-                </div>
-
-                <div class="manage-card">
-                    <div class="manage-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="manage-card-title">HERRAMIENTAS EN LÍNEA</h3>
-                </div>
-
-                <div class="manage-card">
-                    <div class="manage-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="manage-card-title">HORARIO DE ATENCIÓN Y SERVICIOS</h3>
-                </div>
-
-                <div class="manage-card">
-                    <div class="manage-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="manage-card-title">FEDEX BILLING ONLINE</h3>
+            <div class="gallery-item fade-in">
+                <div class="gallery-item-image">💉</div>
+                <div class="gallery-item-content">
+                    <h3>Instrumental Quirúrgico</h3>
+                    <p>Herramientas de precisión con tecnología láser y materiales biocompatibles.</p>
+                    <a href="#" class="learn-more">Ver detalles</a>
                 </div>
             </div>
-        </section>
-
-        <section class="promo-section">
-            <div class="promo-content">
-                <h2 class="promo-title">Tus planes son increíbles. ¡Prueba FedEx para alcanzar nuevos destinos!</h2>
-                <p class="promo-text">Obtén un 50 % de descuento al hacer envíos utilizando los servicios internacionales. Visita un Centro de Envío.</p>
-                <button class="promo-btn">Más detalles</button>
-            </div>
-            <div class="promo-image">
-                <img src="png-clipart-volleyball-sphere-ball-sphere-volleyball-removebg-preview.png" alt="Volleyball" class="volleyball-img">
-            </div>
-        </section>
-
-        <section class="news-section">
-            <div class="news-card">
-                <div class="news-content">
-                    <h3 class="news-title">Aprovecha precios bajos para tus envíos</h3>
-                    <p class="news-text">Si tienes un envío urgente, nuestra herramienta de Tarifas de Último Minuto te ofrece inmediatamente la tarifa más económica. Aprovecha la capacidad disponible en nuestra red para realizar tus envíos urgentes de una manera más flexible al mejor precio.</p>
-                    <p class="news-note">* Se aplican algunas restricciones.</p>
-                    <button class="news-btn">MÁS DETALLES</button>
+            <div class="gallery-item fade-in">
+                <div class="gallery-item-image">🧬</div>
+                <div class="gallery-item-content">
+                    <h3>Biotecnología</h3>
+                    <p>Equipos para análisis genético y medicina personalizada de última generación.</p>
+                    <a href="#" class="learn-more">Ver detalles</a>
                 </div>
             </div>
-
-            <div class="news-card">
-                <div class="news-content">
-                    <h3 class="news-title">La aduana de EE. UU. implementa nuevas reglas para las descripciones de mercancías</h3>
-                    <p class="news-text">A partir del 12 de noviembre de 2024, cualquier envío entrante a los Estados Unidos con descripciones ambiguas o sin descripción alguna de las mercancías podrá ser rechazado por la Oficina de Aduanas y Protección Fronteriza de EE. UU. (CBP). Asegúrate de que tus envíos incluyan una descripción precisa de las mercancías para evitar retrasos.</p>
-                    <button class="news-btn">MÁS DETALLES</button>
+            <div class="gallery-item fade-in">
+                <div class="gallery-item-image">📊</div>
+                <div class="gallery-item-content">
+                    <h3>Imagenología</h3>
+                    <p>Sistemas de imagen médica con resolución excepcional y procesamiento IA.</p>
+                    <a href="#" class="learn-more">Ver detalles</a>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="gallery-item fade-in">
+                <div class="gallery-item-image">⚡</div>
+                <div class="gallery-item-content">
+                    <h3>Electromedicina</h3>
+                    <p>Equipos de electroterapia y estimulación con protocolos personalizables.</p>
+                    <a href="#" class="learn-more">Ver detalles</a>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <div class="gallery-item-image">🔋</div>
+                <div class="gallery-item-content">
+                    <h3>Sistemas de Respaldo</h3>
+                    <p>Energía ininterrumpida para equipos críticos con baterías de larga duración.</p>
+                    <a href="#" class="learn-more">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <button class="fedex-manager-btn">FEDEX SHIP MANAGER™</button>
+    <section class="image-showcase fade-in">
+        <div class="showcase-container">
+            <div class="showcase-image">🏥</div>
+            <div class="showcase-text">
+                <h2>Transformando Hospitales en Centros de Innovación</h2>
+                <p>Más de 500 instituciones médicas confían en nuestra tecnología para brindar atención de clase mundial a millones de pacientes cada año.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="split-section fade-in">
+        <div class="split-container">
+            <div class="featured-content">
+                <h3>Diseñado para Profesionales</h3>
+                <h2>Eficiencia que Marca la Diferencia</h2>
+                <p>Cada producto está diseñado pensando en la ergonomía y el flujo de trabajo del personal médico. Interfaces intuitivas que reducen el tiempo de capacitación y aumentan la productividad.</p>
+                <ul class="feature-list">
+                    <li>Diseño ergonómico certificado</li>
+                    <li>Interfaz multi-idioma</li>
+                    <li>Mantenimiento predictivo con IA</li>
+                    <li>Soporte técnico 24/7</li>
+                </ul>
+            </div>
+            <div class="split-image">⚕️</div>
+        </div>
+    </section>
+
+    <section class="split-section fade-in" style="background: #fbfbfd;">
+        <div class="split-container">
+            <div class="split-image">🔒</div>
+            <div class="featured-content">
+                <h3>Seguridad y Privacidad</h3>
+                <h2>Protección de Datos Médicos</h2>
+                <p>Cumplimos con los estándares más estrictos de seguridad y privacidad. Tus datos y los de tus pacientes están protegidos con encriptación de nivel militar.</p>
+                <ul class="feature-list">
+                    <li>Certificación HIPAA completa</li>
+                    <li>Encriptación end-to-end</li>
+                    <li>Auditorías de seguridad continuas</li>
+                    <li>Backup automático en la nube</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-section fade-in" id="tecnologia">
+        <div class="tech-header">
+            <h2>Tecnología de Vanguardia</h2>
+            <p>Innovación que impulsa la medicina del futuro</p>
+        </div>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-icon">🤖</div>
+                <h3>Inteligencia Artificial</h3>
+                <p>Algoritmos de machine learning que asisten en diagnósticos, predicen patrones y optimizan tratamientos con precisión sin precedentes.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">☁️</div>
+                <h3>Cloud Computing</h3>
+                <p>Acceso remoto seguro a datos y sistemas desde cualquier lugar, con sincronización instantánea y almacenamiento ilimitado.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">📱</div>
+                <h3>Conectividad IoT</h3>
+                <p>Ecosistema integrado de dispositivos que se comunican entre sí para crear un ambiente médico completamente conectado.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">🔬</div>
+                <h3>Nanotecnología</h3>
+                <p>Sensores y componentes a escala nanométrica que permiten análisis más precisos y menos invasivos para los pacientes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section fade-in">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>Hospitales Equipados</p>
+            </div>
+            <div class="stat-item">
+                <h3>50K+</h3>
+                <p>Profesionales Capacitados</p>
+            </div>
+            <div class="stat-item">
+                <h3>2M+</h3>
+                <p>Pacientes Atendidos</p>
+            </div>
+            <div class="stat-item">
+                <h3>98%</h3>
+                <p>Satisfacción Cliente</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="image-showcase fade-in" style="background: white;">
+        <div class="showcase-container">
+            <div class="showcase-image" style="background: linear-gradient(135deg, #8ba89a 0%, #9fb5a8 100%);">🌍</div>
+            <div class="showcase-text">
+                <h2>Presencia Global, Servicio Local</h2>
+                <p>Con oficinas en 25 países y distribuidores en más de 60, estamos cerca de ti sin importar dónde te encuentres. Soporte técnico en tu idioma, cuando lo necesites.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials fade-in" id="testimonios">
+        <div class="section-header">
+            <h2>Lo Que Dicen Nuestros Clientes</h2>
+            <p>Historias reales de profesionales que confían en Biomed</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Los equipos de Biomed han revolucionado nuestro departamento de diagnóstico. La precisión y velocidad son incomparables. Hemos reducido tiempos de espera en un 60%."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">DM</div>
+                    <div class="author-info">
+                        <h4>Dra. María Rodríguez</h4>
+                        <p>Directora de Laboratorio, Hospital Central</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "La integración con nuestros sistemas existentes fue perfecta. El equipo de soporte técnico es excepcional, siempre disponibles y profesionales."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JG</div>
+                    <div class="author-info">
+                        <h4>Dr. Jorge García</h4>
+                        <p>Jefe de Cirugía, Clínica San Rafael</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Invertir en tecnología Biomed fue la mejor decisión para nuestra clínica. Los resultados en satisfacción del paciente hablan por sí mismos."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AS</div>
+                    <div class="author-info">
+                        <h4>Ana Sánchez</h4>
+                        <p>Administradora, Centro Médico Vida</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-section fade-in" style="background: white;">
+        <div class="featured-container">
+            <div class="featured-content">
+                <h3>Capacitación Continua</h3>
+                <h2>Academia Biomed</h2>
+                <p>Ofrecemos programas de capacitación certificados para tu equipo. Desde cursos básicos hasta especializaciones avanzadas en el uso de nuestras tecnologías.</p>
+                <ul class="feature-list">
+                    <li>Cursos presenciales y en línea</li>
+                    <li>Certificaciones reconocidas</li>
+                    <li>Material didáctico actualizado</li>
+                    <li>Webinars mensuales gratuitos</li>
+                </ul>
+                <a href="#" class="learn-more">Explorar cursos</a>
+            </div>
+            <div class="featured-image">📚</div>
+        </div>
+    </section>
+
+    <section class="contact fade-in" id="contacto">
+        <div class="contact-content">
+            <h2>Hablemos de Tu Proyecto</h2>
+            <p>Nuestro equipo está listo para ayudarte a encontrar la solución perfecta</p>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="empresa">Institución / Empresa</label>
+                        <input type="text" id="empresa" name="empresa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interes">¿Qué te interesa?</label>
+                        <input type="text" id="interes" name="interes" placeholder="Ej: Equipos de diagnóstico">
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Enviar Solicitud</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>PRODUCTOS</h4>
+                <ul>
+                    <li><a href="#">Diagnóstico</a></li>
+                    <li><a href="#">Monitoreo</a></li>
+                    <li><a href="#">Instrumental</a></li>
+                    <li><a href="#">Biotecnología</a></li>
+                    <li><a href="#">Imagenología</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>SOLUCIONES</h4>
+                <ul>
+                    <li><a href="#">Hospitales</a></li>
+                    <li><a href="#">Clínicas</a></li>
+                    <li><a href="#">Laboratorios</a></li>
+                    <li><a href="#">Consultorios</a></li>
+                    <li><a href="#">Investigación</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>RECURSOS</h4>
+                <ul>
+                    <li><a href="#">Academia Biomed</a></li>
+                    <li><a href="#">Documentación</a></li>
+                    <li><a href="#">Certificaciones</a></li>
+                    <li><a href="#">Blog Técnico</a></li>
+                    <li><a href="#">Casos de Éxito</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>EMPRESA</h4>
+                <ul>
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Carreras</a></li>
+                    <li><a href="#">Prensa</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Soporte 24/7</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">
+                © 2025 Biomed. Todos los derechos reservados. | Política de Privacidad | Términos de Servicio
+            </div>
+            <div class="social-links">
+                <a href="#">📘</a>
+                <a href="#">📷</a>
+                <a href="#">🐦</a>
+                <a href="#">💼</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            // Update icon
-            const icon = document.querySelector('.theme-icon');
-            if (newTheme === 'dark') {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
-            } else {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu interés! Nuestro equipo se pondrá en contacto contigo en las próximas 24 horas.');
+            this.reset();
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
             }
-        }
+        });
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileNav');
-            menu.classList.toggle('active');
-        }
-
-        function selectCard(card) {
-            document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
-        }
-
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        
-        // Update icon on load
-        if (savedTheme === 'dark') {
-            const icon = document.querySelector('.theme-icon');
-            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
-        }
+        // Header background on scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.85)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.72)';
+            }
+        });
     </script>
-
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDJ4PJ2H9DcwkPX0OzPLDG8SMOL2MVEoj0",
-    authDomain: "biomedweb.firebaseapp.com",
-    projectId: "biomedweb",
-    storageBucket: "biomedweb.firebasestorage.app",
-    messagingSenderId: "112897214657",
-    appId: "1:112897214657:web:ce23d920e68bc54a506c40",
-    measurementId: "G-NMZ8B0KM25"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-
 </body>
 </html>
